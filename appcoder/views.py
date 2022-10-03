@@ -93,7 +93,14 @@ def create_estudiantes(request):
 @login_required
 def read_estudiantes(request=None):
     estudiantes = Estudiante.objects.all() #Trae todo
-    return render(request, "estudiantesCRUD/read_estudiantes.html", {"estudiantes": estudiantes})
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+    #return render(request, 'home.html', {'avatar': avatar})
+    return render(request, "estudiantesCRUD/read_estudiantes.html", {"estudiantes": estudiantes,'avatar': avatar })
+    #return render(request, "estudiantesCRUD/read_estudiantes.html", {"estudiantes": estudiantes,})
 
 
 def update_estudiantes(request, estudiante_id):
@@ -215,7 +222,11 @@ def editarperfil(request):
             #return render (request, 'home.html')
         else:
             avatar = Avatar.objects.filter(user = request.user.id)
-            return render(request, 'home.html', {'avatar': avatar[0].image.url})
+            try:
+                avatar = avatar[0].image.url
+            except:
+                avatar = None
+            return render(request, 'home.html', {'form':form, 'avatar': avatar})
 
             #return render (request, 'home.html', {'form':form})
     else:
@@ -239,7 +250,6 @@ def changepass(request):
                 avatar = None
             return render(request, 'home.html', {'avatar': avatar})
            
-
     else:
         #form = PasswordChangeForm(request.user)
         form = ChangePasswordForm(user = request.user)
@@ -264,8 +274,12 @@ def AgregarAvatar(request):
             user = User.objects.get(username = request.user)
             avatar = Avatar (user = user, image = form.cleaned_data['avatar'], id = request.user.id)
             avatar.save()
-            avatar = Avatar.objects.filter(user = request.user.id)
-            return render(request, 'home.html', {'avatar': avatar[0].image.url})
+            avatar = Avatar.objects.filter(user = request.user.id)   
+            try:
+                avatar = avatar[0].image.url
+            except:
+                avatar = None           
+            return render(request, 'home.html', {'avatar': avatar})
     else: 
         try:
             avatar = avatar.objects.filter(user = request.user.id)
