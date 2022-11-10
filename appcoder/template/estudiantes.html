@@ -9,7 +9,7 @@
         <form class="formDataEstudiantes" action="/appcoder/estudiantes/" method="POST"> {% csrf_token %}
             <input type="text" name="nombre" placeholder="nombre">
             <input type="text" name="apellido" placeholder="apellido">
-            <input type="email" name="email" placeholder="email">
+            <input type="email" name="email" placeholder="email"required><!-- poniendo required no te deja enviar formulario si no pones datos-->
             <button type="submit" class="btn btn-primary btndj">Registrar</button>
         </form>
     </div>

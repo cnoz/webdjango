@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
 <link rel="stylesheet" href="{%static 'css/myestilo.css'%}">
 
+<h3>Estudiante, Te estas registrando</h3>
 <form class="formDataEstudiantes" method="POST" action="/appcoder/create_estudiantes/">{% csrf_token %}
     <input type="text" name="nombre" placeholder="nombre">
     <input type="text" name="apellido" placeholder="Apellido">

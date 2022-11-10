@@ -30,8 +30,7 @@ urlpatterns = [
     path('cursos/', cursos),
     path('estudiante/',estudiante),
     path('curso1/',curso1),
-    path('appcoder/', include("appcoder.urls"))
-    
+    path('appcoder/', include("appcoder.urls"))    
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
